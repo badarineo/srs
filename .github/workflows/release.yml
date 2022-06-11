@@ -113,66 +113,6 @@ jobs:
           docker tag ossrs/lighthouse:$SRS_TAG registry.cn-hangzhou.aliyuncs.com/ossrs/lighthouse:latest
           docker push --all-tags registry.cn-hangzhou.aliyuncs.com/ossrs/lighthouse
 
-      # Tencent TCR Singapore hub
-      - name: Login Tencent Singapore docker hub
-        uses: docker/login-action@v1
-        with:
-          registry: sgccr.ccs.tencentyun.com
-          username: "${{ secrets.TCR_USERNAME }}"
-          password: "${{ secrets.TCR_PASSWORD }}"
-      - name: Push to Tencent Singapore docker hub
-        run: |
-          docker tag ossrs/srs:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/srs:$SRS_TAG
-          docker tag ossrs/srs:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/srs:$SRS_VERSION
-          docker tag ossrs/srs:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/srs:v$SRS_MAJOR
-          docker tag ossrs/srs:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/srs:$SRS_MAJOR
-          docker tag ossrs/srs:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/srs:latest
-          docker push --all-tags sgccr.ccs.tencentyun.com/ossrs/srs
-          #
-          docker tag ossrs/droplet:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/droplet:$SRS_TAG
-          docker tag ossrs/droplet:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/droplet:$SRS_VERSION
-          docker tag ossrs/droplet:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/droplet:v$SRS_MAJOR
-          docker tag ossrs/droplet:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/droplet:$SRS_MAJOR
-          docker tag ossrs/droplet:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/droplet:latest
-          docker push --all-tags sgccr.ccs.tencentyun.com/ossrs/droplet
-          #
-          docker tag ossrs/lighthouse:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/lighthouse:$SRS_TAG
-          docker tag ossrs/lighthouse:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/lighthouse:$SRS_VERSION
-          docker tag ossrs/lighthouse:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/lighthouse:v$SRS_MAJOR
-          docker tag ossrs/lighthouse:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/lighthouse:$SRS_MAJOR
-          docker tag ossrs/lighthouse:$SRS_TAG sgccr.ccs.tencentyun.com/ossrs/lighthouse:latest
-          docker push --all-tags sgccr.ccs.tencentyun.com/ossrs/lighthouse
-
-      # Tencent TCR Beijing hub
-      - name: Login Tencent Beijing docker hub
-        uses: docker/login-action@v1
-        with:
-          registry: ccr.ccs.tencentyun.com
-          username: "${{ secrets.TCR_USERNAME }}"
-          password: "${{ secrets.TCR_PASSWORD }}"
-      - name: Push to Tencent Beijing docker hub
-        run: |
-          docker tag ossrs/srs:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/srs:$SRS_TAG
-          docker tag ossrs/srs:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/srs:$SRS_VERSION
-          docker tag ossrs/srs:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/srs:v$SRS_MAJOR
-          docker tag ossrs/srs:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/srs:$SRS_MAJOR
-          docker tag ossrs/srs:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/srs:latest
-          docker push --all-tags ccr.ccs.tencentyun.com/ossrs/srs
-          #
-          docker tag ossrs/droplet:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/droplet:$SRS_TAG
-          docker tag ossrs/droplet:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/droplet:$SRS_VERSION
-          docker tag ossrs/droplet:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/droplet:v$SRS_MAJOR
-          docker tag ossrs/droplet:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/droplet:$SRS_MAJOR
-          docker tag ossrs/droplet:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/droplet:latest
-          docker push --all-tags ccr.ccs.tencentyun.com/ossrs/droplet
-          #
-          docker tag ossrs/lighthouse:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/lighthouse:$SRS_TAG
-          docker tag ossrs/lighthouse:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/lighthouse:$SRS_VERSION
-          docker tag ossrs/lighthouse:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/lighthouse:v$SRS_MAJOR
-          docker tag ossrs/lighthouse:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/lighthouse:$SRS_MAJOR
-          docker tag ossrs/lighthouse:$SRS_TAG ccr.ccs.tencentyun.com/ossrs/lighthouse:latest
-          docker push --all-tags ccr.ccs.tencentyun.com/ossrs/lighthouse
-
       ##################################################################################################################
       ##################################################################################################################
       ##################################################################################################################
@@ -219,9 +159,9 @@ jobs:
             * Source: ${{ env.SRS_SOURCE_MD5 }} [${{ env.SRS_SOURCE_TAR }}](https://github.com/ossrs/srs/releases/download/${{ env.SRS_TAG }}/${{ env.SRS_SOURCE_TAR }})
             * Binary: ${{ env.SRS_PACKAGE_MD5 }} [${{ env.SRS_PACKAGE_ZIP }}](https://github.com/ossrs/srs/releases/download/${{ env.SRS_TAG }}/${{ env.SRS_PACKAGE_ZIP }})
             ## Docker
-            * China: [docker pull ccr.ccs.tencentyun.com/ossrs/srs:latest](https://github.com/ossrs/srs/wiki/v4_CN_Home#docker)
-            * China: [docker pull ccr.ccs.tencentyun.com/ossrs/srs:${{ env.SRS_MAJOR }}](https://github.com/ossrs/srs/wiki/v4_CN_Home#docker)
-            * China: [docker pull ccr.ccs.tencentyun.com/ossrs/srs:${{ env.SRS_TAG }}](https://github.com/ossrs/srs/wiki/v4_CN_Home#docker)
+            * China: [docker pull registry.cn-hangzhou.aliyuncs.com/ossrs/srs:latest](https://github.com/ossrs/srs/wiki/v4_CN_Home#docker)
+            * China: [docker pull registry.cn-hangzhou.aliyuncs.com/ossrs/srs:${{ env.SRS_MAJOR }}](https://github.com/ossrs/srs/wiki/v4_CN_Home#docker)
+            * China: [docker pull registry.cn-hangzhou.aliyuncs.com/ossrs/srs:${{ env.SRS_TAG }}](https://github.com/ossrs/srs/wiki/v4_CN_Home#docker)
             * Global: [docker pull ossrs/srs:latest](https://github.com/ossrs/srs/wiki/v4_EN_Home#docker)
             * Global: [docker pull ossrs/srs:${{ env.SRS_MAJOR }}](https://github.com/ossrs/srs/wiki/v4_EN_Home#docker)
             * Global: [docker pull ossrs/srs:${{ env.SRS_TAG }}](https://github.com/ossrs/srs/wiki/v4_EN_Home#docker)
@@ -255,16 +195,28 @@ jobs:
       ##################################################################################################################
       ##################################################################################################################
       ##################################################################################################################
-      # K8S release to official website
-      - name: Setup KUBCONFIG for Aliyun ACK
-        run: |-
-          KUBECONFIG=$RUNNER_TEMP/kubeconfig_$(date +%s)
-          echo "${{ secrets.KUBCONFIG }}" > $KUBECONFIG
-          echo "KUBECONFIG=$KUBECONFIG" >> $GITHUB_ENV
-      # K8S for SRS 4.0
-      - name: Release SRS 4.0 to Aliyun ACK
-        if: ${{ startsWith(github.ref, 'refs/tags/v4') }}
-        run: |-
-          kubectl set image deploy/srs4-deploy srs4=registry.cn-hangzhou.aliyuncs.com/ossrs/srs:$SRS_TAG
-          kubectl describe deploy/srs4-deploy
+      # Generate variables like:
+      #   SRS_DROPLET_EIP=1.2.3.4
+      - name: Build variables for lh.ossrs.net
+        run: |
+          SRS_DROPLET_EIP=$(dig +short lh.ossrs.net)
+          echo "SRS_DROPLET_EIP=$SRS_DROPLET_EIP" >> $GITHUB_ENV
+      - name: Release to lh.ossrs.net
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.SRS_DROPLET_EIP }}
+          username: root
+          key: ${{ secrets.DIGITALOCEAN_SSHKEY }}
+          port: 22
+          envs: SRS_MAJOR
+          timeout: 60s
+          command_timeout: 30m
+          script: |
+            docker pull registry.cn-hangzhou.aliyuncs.com/ossrs/srs:$SRS_MAJOR
+            #
+            # Cleanup old docker images.
+            for image in $(docker images |grep '<none>' |awk '{print $3}'); do
+              docker rmi -f $image
+              echo "Remove image $image, r0=$?"
+            done
 
